@@ -42,7 +42,7 @@ def main():
 
     if pdf_file is not None:
     # Read the uploaded file using PyPDF2
-        pdf_file = PyPDF2.PdfReader(pdf_file)
+        pdf_file2 = PyPDF2.PdfReader(pdf_file)
         pdf_file1 = 'f'
     
     else:
@@ -77,8 +77,8 @@ import tabula
 from tabula import read_pdf
 
 if pdf_file1 is not None:
-    pdf_file = PyPDF2.PdfReader(pdf_file)
-    tables = tabula.read_pdf(pdf_file, pages='all',multiple_tables=True,stream=True, guess=True)
+    pdf_file2 = PyPDF2.PdfReader(pdf_file)
+    tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
     # loop through each table and save as CSV file
     for i, table in enumerate(tables):
