@@ -27,6 +27,23 @@ def app():
     st.title("ACU Class Schedule")
     st.write("Welcome! Please upload your class schedule in PDF format.")
 # Create a Streamlit file uploader widget for the PDF file
+import streamlit as st
+
+def file_upload_widget(widget_id):
+    return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
+
+def main():
+    st.title("ACU1")
+
+    # create a unique ID for the file uploader widget
+    file_upload_id = "file_upload"
+
+    # display the file uploader widget
+    pdf_file = file_upload_widget(file_upload_id)
+
+if __name__ == "__main__":
+    main()
+
 with st.sidebar:
     pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
