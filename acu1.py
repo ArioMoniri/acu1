@@ -39,10 +39,11 @@ def extract_data(feed):
             data.append(p.extract_tables())
     return None
 
-def file_upload_widget(widget_id):
-    return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
-  if uploaded_file is not None:
-        df = extract_data(uploaded_file)
+#def file_upload_widget(widget_id):
+    #return 
+uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
+if uploaded_file is not None:
+    df = extract_data(uploaded_file)
     
 import camelot
 import pandas as pd
