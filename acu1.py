@@ -74,7 +74,7 @@ import camelot
 import pandas as pd
 tables = None
 if pdf_file is not None:
-    tables = camelot.read_pdf(pdf_file.read())
+    tables = camelot.read_pdf(pdf_file)
     for i, table in enumerate(tables):
         table.to_csv(f"table{i+1}.csv")  # save each table as a CSV file
 # concatenate all CSV files into a single DataFrame
