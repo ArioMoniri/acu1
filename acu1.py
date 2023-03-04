@@ -42,7 +42,7 @@ def main():
 
     if pdf_file is not None:
     # Read the uploaded file using PyPDF2
-    pdf_file = PyPDF2.PdfFileReader(pdf_file)
+        pdf_file = PyPDF2.PdfFileReader(pdf_file)
     
     else:
         # Display a message to the user to upload a file
