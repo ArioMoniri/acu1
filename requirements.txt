@@ -13,3 +13,4 @@ image-processing
 lattice
 parse
 handler
+PyPDF2
