@@ -18,7 +18,8 @@ pd.set_option('display.max_rows', 500)
 # Import Streamlit and other necessary libraries
 import streamlit as st
 import pandas as pd
-import tabula-py as tabula
+import tabula_py as tabula
+
 # Define the app
 def app():
     st.title("ACU Class Schedule")
