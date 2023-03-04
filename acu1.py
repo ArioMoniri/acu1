@@ -15,14 +15,14 @@ pd.set_option('display.max_rows', 500)
 
 
 # Import Module
-#import pdftables_api
+import pdftables_api
 
 # API KEY VERIFICATION
-#conversion = pdftables_api.Client('iqe7dhe1adbm')
+conversion = pdftables_api.Client('iqe7dhe1adbm')
 
 # PDf to CSV
 # (Hello.pdf, Hello)
-#conversion.csv('MED212 online-program 23.02.23[2872].pdf', 'MED212 online-program 23.02.23[28723].csv')
+conversion.csv('MED212 online-program 23.02.23[2872].pdf', 'MED212 online-program 23.02.23[28723].csv')
 
 
 # In[7]:
