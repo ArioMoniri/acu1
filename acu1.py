@@ -58,11 +58,7 @@ import streamlit as st
 import pandas as pd
 
 
-# Add a title to the app
-st.title("PDF to CSV Converter")
 
-# Create a Streamlit file uploader widget for the PDF file
-pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"],key="pdf_file")
 
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import camelot
