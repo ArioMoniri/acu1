@@ -18,7 +18,7 @@ pd.set_option('display.max_rows', 500)
 # Import Streamlit and other necessary libraries
 import streamlit as st
 import pandas as pd
-import tabula
+import tabula-py as tabula
 # Define the app
 def app():
     st.title("ACU Class Schedule")
@@ -34,7 +34,7 @@ email = st.text_input("Enter your email:")
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import streamlit as st
 import pandas as pd
-import tabula
+
 
 # Add a title to the app
 st.title("PDF to CSV Converter")
@@ -479,7 +479,7 @@ data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 import streamlit as st
 import pandas as pd
-import tabula
+
 import icalendar
 from datetime import datetime, timedelta
 import base64
