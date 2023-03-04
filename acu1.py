@@ -71,6 +71,7 @@ if pdf_file is not None:
         for i, table in enumerate(tables):
             table.to_csv(f"table{i+1}.csv")  # save each table as a CSV file
         # concatenate all CSV files into a single DataFrame
+        datay = pd.DataFrame()
         datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))])
         
     except:
@@ -93,9 +94,9 @@ else:
 
 # In[8]:
 
-if datay is not None:
-    data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
-    data1.columns = range(len(data1.columns))
+
+ data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
+ data1.columns = range(len(data1.columns))
 
 
 # In[9]:
