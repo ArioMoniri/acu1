@@ -18,8 +18,7 @@ pd.set_option('display.max_rows', 500)
 # Import Streamlit and other necessary libraries
 import streamlit as st
 import pandas as pd
-import subprocess
-subprocess.run(["pip", "install", "tabula-py"])
+
 
 import tabula_py
 
@@ -47,14 +46,20 @@ st.title("PDF to CSV Converter")
 pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
+import camelot
+
 if pdf_file is not None:
     try:
-        data = tabula.convert_into_df(pdf_file, output_format="csv")
-        #st.write(df)
+        tables = camelot.read_pdf(pdf_file)
+        data = []
+        for table in tables:
+            data.append(table.df)
+        #st.write(data)
     except:
         st.error("Unable to convert PDF file. Please try again with a different file.")
 else:
     st.warning("Please upload a PDF file.")
+
 
 
 
@@ -470,7 +475,7 @@ data4 = data4.drop(index=empty_rows)
 # In[54]:
 
 
-data4 = tabula.convert_into_df(data4, output_format="csv")
+data4 = data4.to_csv(index=False)
 data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
