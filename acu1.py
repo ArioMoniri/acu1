@@ -77,6 +77,7 @@ import tabula
 from tabula import read_pdf
 
 if pdf_file1 is not None:
+    pdf_file = PyPDF2.PdfReader(pdf_file)
     tables = tabula.read_pdf(pdf_file, pages='all',multiple_tables=True,stream=True, guess=True)
 
     # loop through each table and save as CSV file
