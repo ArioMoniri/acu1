@@ -41,6 +41,7 @@ def main():
 
     # display the file uploader widget
     pdf_file = file_upload_widget(file_upload_id)
+    
 
 if __name__ == "__main__":
     main()
@@ -93,21 +94,21 @@ else:
 
 # In[8]:
 
-if datay is not None:
+if pdf_file is not None:
     data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
     data1.columns = range(len(data1.columns))
 
 
 # In[9]:
 
+if pdf_file is not None:
+    coll = int(len(data1.columns))
+    coll2 = int(len(data1.columns)) - 1
+    while (coll2 >= 3):
+     if (coll > 3):
+             data1.iloc[:,2].combine_first(data1.iloc[:,coll2])
+     coll2 = coll2 - 1
 
-coll = int(len(data1.columns))
-coll2 = int(len(data1.columns)) - 1
-while (coll2 >= 3):
- if (coll > 3):
-         data1.iloc[:,2].combine_first(data1.iloc[:,coll2])
- coll2 = coll2 - 1
- 
 
 
 # In[10]:
@@ -127,9 +128,9 @@ while (coll2 >= 3):
 
 # In[12]:
 
-
-data1.columns = ['TT','Subject','Instructor']
-#data1['Date'] = data1.loc[:, "TT"]
+if pdf_file is not None:
+    data1.columns = ['TT','Subject','Instructor']
+    #data1['Date'] = data1.loc[:, "TT"]
 
 
 # In[13]:
@@ -151,47 +152,48 @@ data1.columns = ['TT','Subject','Instructor']
 
 # In[15]:
 
-
+if pdf_file is not None:
 #data1.Date = ''
-data1['Date'] = ''
+    data1['Date'] = ''
 
 
 # In[16]:
 
+if pdf_file is not None:
+    data1['Date'] = data1.apply(lambda x: ','.join([str(cell) for cell in x if 'DAY' in str(cell)]), axis=1)
 
-data1['Date'] = data1.apply(lambda x: ','.join([str(cell) for cell in x if 'DAY' in str(cell)]), axis=1)
-
-for column in data1.columns:
-    if column != 'Date':
-        data1[column] = data1[column].apply(lambda x: '' if str(x) in data1['Date'].values else x)
+    for column in data1.columns:
+        if column != 'Date':
+            data1[column] = data1[column].apply(lambda x: '' if str(x) in data1['Date'].values else x)
 
 
 # In[17]:
 
-
-data1.dropna(
-    axis=0,
-    how = 'all',
-    subset=None,
-    inplace=True
-)
+if pdf_file is not None:
+    data1.dropna(
+        axis=0,
+        how = 'all',
+        subset=None,
+        inplace=True
+    )
 
 
 # In[18]:
 
+if pdf_file is not None:
+    
+    x=1
+    y=11
+    z=0
+    i=1
+    xx = int(len(data1)/12) + 1
+    while i in range(xx):
 
-x=1
-y=11
-z=0
-i=1
-xx = int(len(data1)/12) + 1
-while i in range(xx):
-   
-    data1.loc[x:y,'Date']= data1.iloc[z,3]
-    x=x+12
-    y=y+12
-    z=z+12
-    i=i+1
+        data1.loc[x:y,'Date']= data1.iloc[z,3]
+        x=x+12
+        y=y+12
+        z=z+12
+        i=i+1
 
 
 # In[19]:
@@ -203,65 +205,65 @@ while i in range(xx):
 
 # In[20]:
 
-
+if pdf_file is not None:
 #data2 = data1.replace(np. NaN,'',regex=True)
-data1 = data1.applymap(lambda x: '' if pd.isna(x) else '' if 'Unname' in str(x) else x)
+    data1 = data1.applymap(lambda x: '' if pd.isna(x) else '' if 'Unname' in str(x) else x)
 
 
 # In[21]:
 
-
-data1[['Date', 'Day']] = data1.Date.str.split(" ", expand = True)
+if pdf_file is not None:
+    data1[['Date', 'Day']] = data1.Date.str.split(" ", expand = True)
 
 
 # In[22]:
 
-
-data1.columns = ['TT','Subject','Instructor','Date','Day']
+if pdf_file is not None:
+    data1.columns = ['TT','Subject','Instructor','Date','Day']
 
 
 # In[23]:
 
-
-data1[['Sart Time', 'End Time']] = data1.TT.str.split(" - ", expand = True)
+if pdf_file is not None:
+    data1[['Sart Time', 'End Time']] = data1.TT.str.split(" - ", expand = True)
 
 
 # In[24]:
 
+if pdf_file is not None:
+    z=0
+    i=1
+    while i in range(xx):
 
-z=0
-i=1
-while i in range(xx):
-   
-    data1.loc[z,"End Time"]= ''
-    z=z+12
-    i=i+1
+        data1.loc[z,"End Time"]= ''
+        z=z+12
+        i=i+1
 
 
-z=0
-i=1
-while i in range(xx):
-   
-    data1.loc[z,"Date"]= ''
-    z=z+12
-    i=i+1
+    z=0
+    i=1
+    while i in range(xx):
 
-    
-z=0
-i=1
-while i in range(xx):
-   
-    data1.loc[z,"Day"]= ''
-    z=z+12
-    i=i+1
+        data1.loc[z,"Date"]= ''
+        z=z+12
+        i=i+1
 
-z=0
-i=1
-while i in range(xx):
-   
-    data1.loc[z,"Subject"]= ''
-    z=z+12
-    i=i+1
+
+    z=0
+    i=1
+    while i in range(xx):
+
+        data1.loc[z,"Day"]= ''
+        z=z+12
+        i=i+1
+
+    z=0
+    i=1
+    while i in range(xx):
+
+        data1.loc[z,"Subject"]= ''
+        z=z+12
+        i=i+1
 
 
 # In[25]:
@@ -272,32 +274,32 @@ while i in range(xx):
 
 # In[26]:
 
-
-data1.drop('TT', inplace=True, axis=1)
+if pdf_file is not None:
+    data1.drop('TT', inplace=True, axis=1)
 
 
 # In[27]:
 
-
-data1.columns = ['Subject','Description','Start Date','Day','Start Time','End Time']
+if pdf_file is not None:
+    data1.columns = ['Subject','Description','Start Date','Day','Start Time','End Time']
 
 
 # In[28]:
 
-
-data1['End Date'] = data1.loc[:,'Start Date'] 
+if pdf_file is not None:
+    data1['End Date'] = data1.loc[:,'Start Date'] 
 
 
 # In[29]:
 
-
-data4 = data1.replace(regex=['Study Time'],value= '')
+if pdf_file is not None:
+    data4 = data1.replace(regex=['Study Time'],value= '')
 
 
 # In[30]:
 
-
-data4 = data4.replace(regex=['Lunch Time'],value= '')
+if pdf_file is not None:
+    data4 = data4.replace(regex=['Lunch Time'],value= '')
 
 
 # In[31]:
@@ -308,111 +310,111 @@ data4 = data4.replace(regex=['Lunch Time'],value= '')
 
 # In[32]:
 
+if pdf_file is not None:
+    word_part = 'EXAMINATION'
+    for index, row in data4.iterrows():
 
-word_part = 'EXAMINATION'
-for index, row in data4.iterrows():
+        # Check if the word part is present in any of the cells in the row
+        if any(word_part in str(cell) for cell in row.values):
 
-    # Check if the word part is present in any of the cells in the row
-    if any(word_part in str(cell) for cell in row.values):
-
-        # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
-        for i in range(len(row)):
-            if pd.isnull(row[i]):
-                row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
+            # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
+            for i in range(len(row)):
+                if pd.isnull(row[i]):
+                    row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
 
 
 # In[33]:
 
+if pdf_file is not None:
+    word_part = 'Medicine'
+    for index, row in data4.iterrows():
 
-word_part = 'Medicine'
-for index, row in data4.iterrows():
+        # Check if the word part is present in any of the cells in the row
+        if any(word_part in str(cell) for cell in row.values):
 
-    # Check if the word part is present in any of the cells in the row
-    if any(word_part in str(cell) for cell in row.values):
-
-        # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
-        for i in range(len(row)):
-            if pd.isnull(row[i]):
-                row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
+            # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
+            for i in range(len(row)):
+                if pd.isnull(row[i]):
+                    row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
 
 
 # In[34]:
 
+if pdf_file is not None:
+    word_part = 'Exam'
+    for index, row in data4.iterrows():
 
-word_part = 'Exam'
-for index, row in data4.iterrows():
+        # Check if the word part is present in any of the cells in the row
+        if any(word_part in str(cell) for cell in row.values):
 
-    # Check if the word part is present in any of the cells in the row
-    if any(word_part in str(cell) for cell in row.values):
-
-        # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
-        for i in range(len(row)):
-            if pd.isnull(row[i]):
-                row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
+            # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
+            for i in range(len(row)):
+                if pd.isnull(row[i]):
+                    row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
 
 
 # In[35]:
 
+if pdf_file is not None:
+    word_part = 'exam'
+    for index, row in data4.iterrows():
 
-word_part = 'exam'
-for index, row in data4.iterrows():
+        # Check if the word part is present in any of the cells in the row
+        if any(word_part in str(cell) for cell in row.values):
 
-    # Check if the word part is present in any of the cells in the row
-    if any(word_part in str(cell) for cell in row.values):
-
-        # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
-        for i in range(len(row)):
-            if pd.isnull(row[i]):
-                row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
+            # If the word part is found, fill all empty cells with the contents of the cell where the word part was found
+            for i in range(len(row)):
+                if pd.isnull(row[i]):
+                    row[i] = row[row.astype(str).str.contains(word_part)].iloc[0]
 
 
 # In[36]:
 
-
-data4.dropna(
-    axis=0,
-    how = 'any',
-    subset=None,
-    inplace=True
-)
+if pdf_file is not None:
+    data4.dropna(
+        axis=0,
+        how = 'any',
+        subset=None,
+        inplace=True
+    )
 
 
 # In[37]:
 
-
-word_part = 'THEORETICAL'
-#if data4.apply(lambda x: x.astype(str).str.contains(word_part).any()).any():
-    #print(f"The word part '{word_part}' exists in the DataFrame")
-#else:
-    #print(f"The word part '{word_part}' does not exist in the DataFrame")
-    # pause the code using input() function
-    #input("Press Enter to continue...")
+if pdf_file is not None:
+    word_part = 'THEORETICAL'
+    #if data4.apply(lambda x: x.astype(str).str.contains(word_part).any()).any():
+        #print(f"The word part '{word_part}' exists in the DataFrame")
+    #else:
+        #print(f"The word part '{word_part}' does not exist in the DataFrame")
+        # pause the code using input() function
+        #input("Press Enter to continue...")
 
 
 # In[38]:
 
-
-data4.Description = data4.Description + zoomm
+if pdf_file is not None:
+    data4.Description = data4.Description + zoomm
 
 
 # In[39]:
 
-
-data4 = data4.iloc[1:, :]
+if pdf_file is not None:
+    data4 = data4.iloc[1:, :]
 
 
 # In[40]:
 
+if pdf_file is not None:
+    empty_rows = data4.index[data4['Start Date'] == ''].tolist()
 
-empty_rows = data4.index[data4['Start Date'] == ''].tolist()
+    # drop rows where cell 'B' is empty
+    data4 = data4.drop(index=empty_rows)
 
-# drop rows where cell 'B' is empty
-data4 = data4.drop(index=empty_rows)
+    empty_rows = data4.index[data4['Subject'] == ''].tolist()
 
-empty_rows = data4.index[data4['Subject'] == ''].tolist()
-
-# drop rows where cell 'B' is empty
-data4 = data4.drop(index=empty_rows)
+    # drop rows where cell 'B' is empty
+    data4 = data4.drop(index=empty_rows)
 
 
 # In[41]:
@@ -423,16 +425,16 @@ data4 = data4.drop(index=empty_rows)
 
 # In[42]:
 
-
-data4['Start Date'] = pd.to_datetime(data4['Start Date'], format='%d.%m.%Y')
-data4['Start Date'] = data4['Start Date'].dt.strftime('%m/%d/%Y')
+if pdf_file is not None:
+    data4['Start Date'] = pd.to_datetime(data4['Start Date'], format='%d.%m.%Y')
+    data4['Start Date'] = data4['Start Date'].dt.strftime('%m/%d/%Y')
 
 
 # In[43]:
 
-
-data4['End Date'] = pd.to_datetime(data4['End Date'], format='%d.%m.%Y')
-data4['End Date'] = data4['End Date'].dt.strftime('%m/%d/%Y')
+if pdf_file is not None:
+    data4['End Date'] = pd.to_datetime(data4['End Date'], format='%d.%m.%Y')
+    data4['End Date'] = data4['End Date'].dt.strftime('%m/%d/%Y')
 
 
 # In[44]:
@@ -465,36 +467,36 @@ data4['End Date'] = data4['End Date'].dt.strftime('%m/%d/%Y')
 
 # In[49]:
 
+if pdf_file is not None:
+    # find the indices of rows where 'World' is in the 'Subject' column
+    indices = data4.index[data4['Subject'].str.contains('English')].tolist()
 
-# find the indices of rows where 'World' is in the 'Subject' column
-indices = data4.index[data4['Subject'].str.contains('English')].tolist()
+    # empty the cells in the 'Description' column for those rows
+    data4.loc[indices, 'Description'] = ''
 
-# empty the cells in the 'Description' column for those rows
-data4.loc[indices, 'Description'] = ''
-
-# add the string 'Hello' to the previously emptied cells in the 'Description' column for those rows
-data4.loc[indices, 'Description'] = medeng
+    # add the string 'Hello' to the previously emptied cells in the 'Description' column for those rows
+    data4.loc[indices, 'Description'] = medeng
 
 
 # In[50]:
 
+if pdf_file is not None:
+    indices = data4.index[data4['Subject'].str.contains('Study')].tolist()
 
-indices = data4.index[data4['Subject'].str.contains('Study')].tolist()
+    # empty the cells in the 'Description' column for those rows
+    data4.loc[indices, 'Subject'] = ''
 
-# empty the cells in the 'Description' column for those rows
-data4.loc[indices, 'Subject'] = ''
+    empty_rows = data4.index[data4['Subject'] == ''].tolist()
 
-empty_rows = data4.index[data4['Subject'] == ''].tolist()
-
-# drop rows where cell 'B' is empty
-data4 = data4.drop(index=empty_rows)
+    # drop rows where cell 'B' is empty
+    data4 = data4.drop(index=empty_rows)
 
 
 # In[54]:
 
-
-data4 = data4.to_csv(index=False)
-data4 = pd.DataFrame(data4[1:], columns=data4[0])
+if pdf_file is not None:
+    data4 = data4.to_csv(index=False)
+    data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
 
@@ -516,61 +518,61 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
+if pdf_file is not None:
+    # Set up the app
+    st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
 
-# Set up the app
-st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
+    # Define a function to convert the DataFrame to an iCalendar file
+    def create_ics_file(df):
+        calendar = icalendar.Calendar()
+        calendar.add('prodid', '-//My Reminder Calendar//example.com//')
+        calendar.add('version', '2.0')
+        for index, row in df.iterrows():
+            event = icalendar.Event()
+            event.add('summary', row['Subject'])
+            event.add('description', row['Description'])
+            start_date_str = row['Start Date']
+            start_time_str = row['Start Time']
+            end_date_str = row['End Date']
+            end_time_str = row['End Time']
+            start_dt = datetime.strptime(start_date_str + start_time_str, '%m/%d/%Y%H:%M')
+            end_dt = datetime.strptime(end_date_str + end_time_str, '%m/%d/%Y%H:%M')
+            event.add('dtstart', start_dt)
+            event.add('dtend', end_dt)
+            alarm = icalendar.Alarm()
+            alarm.add('action', 'DISPLAY')
+            alarm.add('description', 'Reminder: ' + row['Subject'])
+            alarm.add('trigger', timedelta(minutes=-15))
+            event.add_component(alarm)
+            calendar.add_component(event)
+        return calendar.to_ical()
 
-# Define a function to convert the DataFrame to an iCalendar file
-def create_ics_file(df):
-    calendar = icalendar.Calendar()
-    calendar.add('prodid', '-//My Reminder Calendar//example.com//')
-    calendar.add('version', '2.0')
-    for index, row in df.iterrows():
-        event = icalendar.Event()
-        event.add('summary', row['Subject'])
-        event.add('description', row['Description'])
-        start_date_str = row['Start Date']
-        start_time_str = row['Start Time']
-        end_date_str = row['End Date']
-        end_time_str = row['End Time']
-        start_dt = datetime.strptime(start_date_str + start_time_str, '%m/%d/%Y%H:%M')
-        end_dt = datetime.strptime(end_date_str + end_time_str, '%m/%d/%Y%H:%M')
-        event.add('dtstart', start_dt)
-        event.add('dtend', end_dt)
-        alarm = icalendar.Alarm()
-        alarm.add('action', 'DISPLAY')
-        alarm.add('description', 'Reminder: ' + row['Subject'])
-        alarm.add('trigger', timedelta(minutes=-15))
-        event.add_component(alarm)
-        calendar.add_component(event)
-    return calendar.to_ical()
+    # Define a function to send email
+    def send_email(email, file_data):
+        msg = MIMEMultipart()
+        msg['From'] = 'your_email@example.com'
+        msg['To'] = email
+        msg['Subject'] = 'Schedule'
 
-# Define a function to send email
-def send_email(email, file_data):
-    msg = MIMEMultipart()
-    msg['From'] = 'your_email@example.com'
-    msg['To'] = email
-    msg['Subject'] = 'Schedule'
+        text = MIMEText('Please find attached your class schedule in iCalendar format.')
+        msg.attach(text)
 
-    text = MIMEText('Please find attached your class schedule in iCalendar format.')
-    msg.attach(text)
+        file_part = MIMEApplication(file_data)
+        file_part.add_header('Content-Disposition', 'attachment', filename='schedule.ics')
+        msg.attach(file_part)
 
-    file_part = MIMEApplication(file_data)
-    file_part.add_header('Content-Disposition', 'attachment', filename='schedule.ics')
-    msg.attach(file_part)
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login('Ariorad2020@gmail.com', 'Ariorad2020')
-    server.sendmail('Ariorad2020@gmail.com', email, msg.as_string())
-    server.quit()
-
-    
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login('Ariorad2020@gmail.com', 'Ariorad2020')
+        server.sendmail('Ariorad2020@gmail.com', email, msg.as_string())
+        server.quit()
 
 
-calcal = create_ics_file(data4)
-send_email(email,calcal)
- 
+
+
+    calcal = create_ics_file(data4)
+    send_email(email,calcal)
+
 
 
   
