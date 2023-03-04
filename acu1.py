@@ -38,7 +38,6 @@ import pdfplumber
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 if uploaded_file is not None:
     global pdf_file1
-    df = extract_data(uploaded_file)
     pdf_file1 = 'd'
 else:
     pdf_file1 = None
@@ -50,6 +49,8 @@ def extract_data(feed):
         for p in pages:
             data.append(p.extract_tables())
     return None
+
+df = extract_data(uploaded_file)
     
 import camelot
 import pandas as pd
