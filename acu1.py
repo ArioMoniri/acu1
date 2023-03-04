@@ -49,7 +49,7 @@ def extract_data(feed):
         for p in pages:
             data.append(p.extract_tables())
         df = pd.DataFrame(sum(data, []))
-    return df
+    return None
 
 df = extract_data(uploaded_file)
     
