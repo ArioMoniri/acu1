@@ -20,7 +20,7 @@ import streamlit as st
 import pandas as pd
 
 
-import tabula_py
+
 
 # Define the app
 def app():
