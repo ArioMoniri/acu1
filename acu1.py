@@ -5,6 +5,7 @@
 
 
 import os 
+import cv2
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -33,7 +34,7 @@ def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
 
 def main():
-    st.title("ACU1")
+    st.title("ACU")
 
     # create a unique ID for the file uploader widget
     file_upload_id = "file_upload"
