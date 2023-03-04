@@ -46,8 +46,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-with st.sidebar:
-    pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
+
 
 
 name = st.text_input("Enter your name:")
