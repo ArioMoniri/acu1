@@ -34,7 +34,7 @@ def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
 
 def main():
-    global pdffile1
+    global pdf_file1
     st.title("ACU")
     file_upload_id = "file_upload"
 
@@ -43,6 +43,7 @@ def main():
     if pdf_file is not None:
     # Read the uploaded file using PyPDF2
         pdf_file = PyPDF2.PdfReader(pdf_file)
+        pdf_file1 = 'f'
     
     else:
         # Display a message to the user to upload a file
