@@ -15,6 +15,23 @@ pd.set_option('display.max_rows', 500)
 
 # In[6]:
 
+# Import Streamlit and other necessary libraries
+import streamlit as st
+import pandas as pd
+import tabula
+
+# Create a Streamlit file uploader widget for the PDF file
+pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
+
+# Convert the PDF to a DataFrame using the convert_pdf_to_csv function
+if pdf_file is not None:
+    # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
+  try:
+    df = tabula.convert_into_df(pdf_url, output_format="csv")[0]
+    st.write(df)
+  except Exception as e:
+    st.error("Error: " + str(e))
+
 
 # Import Module
 import io
