@@ -5,24 +5,43 @@
 
 
 import os 
-os.getcwd()
+import streamlit as st
 import numpy as np
 import pandas as pd
 pd.set_option('display.max_rows', 500)
+#url = "https://github.com/ArioMoniri/acu1/blob/e15fc2a85dc3615de43b0ddda144f4b1cdf36bb4/MED212%20online-program%2023.02.23%5B2872%5D.pdf"
+#r_data = pd.read_csv(url)
 
 
 # In[6]:
 
 
 # Import Module
-import pdftables_api
+import io
+import tabula
 
-# API KEY VERIFICATION
-conversion = pdftables_api.Client('iqe7dhe1adbm')
+def convert_pdf_to_csv(pdf_url):
+    # Read the PDF data using tabula-py and convert it to a DataFrame
+    pdf_data = tabula.read_pdf(pdf_url, pages="all")
+    df = pd.concat(pdf_data)
 
-# PDf to CSV
-# (Hello.pdf, Hello)
-conversion.csv('MED212 online-program 23.02.23[2872].pdf', 'MED212 online-program 23.02.23[28723].csv')
+    # Write the DataFrame to a buffer as a CSV string
+    csv_buffer = io.StringIO()
+    df.to_csv(csv_buffer, index=False)
+
+    # Return the CSV data as a string
+    return csv_buffer.getvalue()
+   
+   def main():
+    # Convert the PDF file to CSV and get the CSV data as a string
+    pdf_url = "https://github.com/ArioMoniri/acu1/blob/e15fc2a85dc3615de43b0ddda144f4b1cdf36bb4/MED212%20online-program%2023.02.23%5B2872%5D.pdf"
+    csv_data = convert_pdf_to_csv(pdf_url)
+
+    # Read the CSV data from the string
+    df = pd.read_csv(io.StringIO(csv_data))
+
+    # Perform data analysis tasks on df
+    ...
 
 
 # In[7]:
