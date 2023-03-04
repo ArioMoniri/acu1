@@ -44,6 +44,7 @@ def extract_data(feed):
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 if uploaded_file is not None:
     df = extract_data(uploaded_file)
+    pdf_file1 = 'd'
     
 import camelot
 import pandas as pd
