@@ -42,7 +42,7 @@ def extract_data(feed):
 def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
   if uploaded_file is not None:
-    df = extract_data(uploaded_file)
+        df = extract_data(uploaded_file)
     
 import camelot
 import pandas as pd
