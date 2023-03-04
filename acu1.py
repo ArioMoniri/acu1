@@ -137,7 +137,7 @@ from tabula import read_pdf
 # In[8]:
 
 if pdf_file1 is not None:
-    #data1 = df.columns.to_frame().T.append(df, ignore_index=True)
+    data1 = df.columns.to_frame().T.append(df, ignore_index=True)
     data1.columns = range(len(data1.columns))
 
 
