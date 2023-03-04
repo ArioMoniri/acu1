@@ -63,14 +63,16 @@ import pandas as pd
 
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import camelot
+import pandas as pd
 
 if pdf_file is not None:
     try:
         tables = camelot.read_pdf(pdf_file)
-        data = []
-        for table in tables:
-            data.append(table.df)
-        st.write(data)
+        for i, table in enumerate(tables):
+            table.to_csv(f"table{i+1}.csv")  # save each table as a CSV file
+        # concatenate all CSV files into a single DataFrame
+        datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))])
+        st.write(datay)  # display the DataFrame
     except:
         st.error("Unable to convert PDF file. Please try again with a different file.")
 else:
@@ -92,7 +94,7 @@ else:
 # In[8]:
 
 
-data1 = data.columns.to_frame().T.append(data, ignore_index=True)
+data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
 data1.columns = range(len(data1.columns))
 
 
