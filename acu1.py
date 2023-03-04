@@ -34,7 +34,7 @@ def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
 
 def main():
-    global pdf_file
+    
     st.title("ACU")
     file_upload_id = "file_upload"
 
