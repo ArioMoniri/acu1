@@ -72,7 +72,7 @@ if pdf_file is not None:
             table.to_csv(f"table{i+1}.csv")  # save each table as a CSV file
         # concatenate all CSV files into a single DataFrame
         datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))])
-        st.write(datay)  # display the DataFrame
+        
     except:
         st.error("Unable to convert PDF file. Please try again with a different file.")
 else:
