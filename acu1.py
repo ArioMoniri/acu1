@@ -19,7 +19,7 @@ pd.set_option('display.max_rows', 500)
 # Import Streamlit and other necessary libraries
 import streamlit as st
 import pandas as pd
-
+import PyPDF2
 
 
 
@@ -41,9 +41,9 @@ def main():
     pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"], key=file_upload_id)
 
     if pdf_file is not None:
-        # Perform operations on the uploaded file
-        # For example, you can use PyPDF2 to read the PDF file
-        pass
+    # Read the uploaded file using PyPDF2
+    pdf_file = PyPDF2.PdfFileReader(pdf_file)
+    
     else:
         # Display a message to the user to upload a file
         st.warning("Please upload a PDF file.")
