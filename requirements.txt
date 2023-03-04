@@ -1,1 +1,10 @@
 camelot-py
+numpy
+pandas
+streamlit
+icalendar
+DateTime
+pybase64
+requires.io
+secure-smtplib
+email-to
