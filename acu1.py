@@ -70,7 +70,7 @@ if pdf_file is not None:
         data = []
         for table in tables:
             data.append(table.df)
-        #st.write(data)
+        st.write(data)
     except:
         st.error("Unable to convert PDF file. Please try again with a different file.")
 else:
