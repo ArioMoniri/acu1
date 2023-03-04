@@ -34,7 +34,7 @@ def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
 
 def main():
-    
+    global pdffile1
     st.title("ACU")
     file_upload_id = "file_upload"
 
@@ -47,7 +47,7 @@ def main():
     else:
         # Display a message to the user to upload a file
         st.warning("Please upload a PDF file.")
-        pdf_file = None
+        pdf_file1 = None
         return
 
 
@@ -75,7 +75,7 @@ import pandas as pd
 import tabula
 from tabula import read_pdf
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     tables = tabula.read_pdf(pdf_file, pages='all',multiple_tables=True,stream=True, guess=True)
 
     # loop through each table and save as CSV file
@@ -102,14 +102,14 @@ if pdf_file is not None:
 
 # In[8]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
     data1.columns = range(len(data1.columns))
 
 
 # In[9]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     coll = int(len(data1.columns))
     coll2 = int(len(data1.columns)) - 1
     while (coll2 >= 3):
@@ -136,7 +136,7 @@ if pdf_file is not None:
 
 # In[12]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1.columns = ['TT','Subject','Instructor']
     #data1['Date'] = data1.loc[:, "TT"]
 
@@ -160,14 +160,14 @@ if pdf_file is not None:
 
 # In[15]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
 #data1.Date = ''
     data1['Date'] = ''
 
 
 # In[16]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1['Date'] = data1.apply(lambda x: ','.join([str(cell) for cell in x if 'DAY' in str(cell)]), axis=1)
 
     for column in data1.columns:
@@ -177,7 +177,7 @@ if pdf_file is not None:
 
 # In[17]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1.dropna(
         axis=0,
         how = 'all',
@@ -188,7 +188,7 @@ if pdf_file is not None:
 
 # In[18]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     
     x=1
     y=11
@@ -213,32 +213,32 @@ if pdf_file is not None:
 
 # In[20]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
 #data2 = data1.replace(np. NaN,'',regex=True)
     data1 = data1.applymap(lambda x: '' if pd.isna(x) else '' if 'Unname' in str(x) else x)
 
 
 # In[21]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1[['Date', 'Day']] = data1.Date.str.split(" ", expand = True)
 
 
 # In[22]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1.columns = ['TT','Subject','Instructor','Date','Day']
 
 
 # In[23]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1[['Sart Time', 'End Time']] = data1.TT.str.split(" - ", expand = True)
 
 
 # In[24]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     z=0
     i=1
     while i in range(xx):
@@ -282,31 +282,31 @@ if pdf_file is not None:
 
 # In[26]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1.drop('TT', inplace=True, axis=1)
 
 
 # In[27]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1.columns = ['Subject','Description','Start Date','Day','Start Time','End Time']
 
 
 # In[28]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data1['End Date'] = data1.loc[:,'Start Date'] 
 
 
 # In[29]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4 = data1.replace(regex=['Study Time'],value= '')
 
 
 # In[30]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4 = data4.replace(regex=['Lunch Time'],value= '')
 
 
@@ -318,7 +318,7 @@ if pdf_file is not None:
 
 # In[32]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     word_part = 'EXAMINATION'
     for index, row in data4.iterrows():
 
@@ -333,7 +333,7 @@ if pdf_file is not None:
 
 # In[33]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     word_part = 'Medicine'
     for index, row in data4.iterrows():
 
@@ -348,7 +348,7 @@ if pdf_file is not None:
 
 # In[34]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     word_part = 'Exam'
     for index, row in data4.iterrows():
 
@@ -363,7 +363,7 @@ if pdf_file is not None:
 
 # In[35]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     word_part = 'exam'
     for index, row in data4.iterrows():
 
@@ -378,7 +378,7 @@ if pdf_file is not None:
 
 # In[36]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4.dropna(
         axis=0,
         how = 'any',
@@ -389,7 +389,7 @@ if pdf_file is not None:
 
 # In[37]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     word_part = 'THEORETICAL'
     #if data4.apply(lambda x: x.astype(str).str.contains(word_part).any()).any():
         #print(f"The word part '{word_part}' exists in the DataFrame")
@@ -401,19 +401,19 @@ if pdf_file is not None:
 
 # In[38]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4.Description = data4.Description + zoomm
 
 
 # In[39]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4 = data4.iloc[1:, :]
 
 
 # In[40]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     empty_rows = data4.index[data4['Start Date'] == ''].tolist()
 
     # drop rows where cell 'B' is empty
@@ -433,14 +433,14 @@ if pdf_file is not None:
 
 # In[42]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4['Start Date'] = pd.to_datetime(data4['Start Date'], format='%d.%m.%Y')
     data4['Start Date'] = data4['Start Date'].dt.strftime('%m/%d/%Y')
 
 
 # In[43]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4['End Date'] = pd.to_datetime(data4['End Date'], format='%d.%m.%Y')
     data4['End Date'] = data4['End Date'].dt.strftime('%m/%d/%Y')
 
@@ -475,7 +475,7 @@ if pdf_file is not None:
 
 # In[49]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     # find the indices of rows where 'World' is in the 'Subject' column
     indices = data4.index[data4['Subject'].str.contains('English')].tolist()
 
@@ -488,7 +488,7 @@ if pdf_file is not None:
 
 # In[50]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     indices = data4.index[data4['Subject'].str.contains('Study')].tolist()
 
     # empty the cells in the 'Description' column for those rows
@@ -502,7 +502,7 @@ if pdf_file is not None:
 
 # In[54]:
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     data4 = data4.to_csv(index=False)
     data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
@@ -526,7 +526,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
-if pdf_file is not None:
+if pdf_file1 is not None:
     # Set up the app
     st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
 
