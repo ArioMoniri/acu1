@@ -43,7 +43,7 @@ pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 if pdf_file is not None:
     try:
-        df = tabula.convert_into_df(pdf_file, output_format="csv")
+        data = tabula.convert_into_df(pdf_file, output_format="csv")
         #st.write(df)
     except:
         st.error("Unable to convert PDF file. Please try again with a different file.")
@@ -53,31 +53,7 @@ else:
 
 
 # Import Module
-import io
-import tabula
 
-def convert_pdf_to_csv(pdf_url):
-    # Read the PDF data using tabula-py and convert it to a DataFrame
-    pdf_data = tabula.read_pdf(pdf_url, pages="all")
-    df = pd.concat(pdf_data)
-
-    # Write the DataFrame to a buffer as a CSV string
-    csv_buffer = io.StringIO()
-    df.to_csv(csv_buffer, index=False)
-
-    # Return the CSV data as a string
-    return csv_buffer.getvalue()
-   
-   def main():
-    # Convert the PDF file to CSV and get the CSV data as a string
-    pdf_url = "https://github.com/ArioMoniri/acu1/blob/e15fc2a85dc3615de43b0ddda144f4b1cdf36bb4/MED212%20online-program%2023.02.23%5B2872%5D.pdf"
-    csv_data = convert_pdf_to_csv(pdf_url)
-
-    # Read the CSV data from the string
-    data = pd.read_csv(io.StringIO(csv_data))
-
-    # Perform data analysis tasks on df
-    ...
 
 
 # In[7]:
