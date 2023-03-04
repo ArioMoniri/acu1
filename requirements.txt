@@ -14,4 +14,4 @@ lattice
 parse
 handler
 PyPDF2
-tabula
+tabula-py
