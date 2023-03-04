@@ -74,6 +74,7 @@ import camelot
 import pandas as pd
 
 if pdf_file is not None:
+    global datay
     try:
         tables = camelot.read_pdf(pdf_file)
         for i, table in enumerate(tables):
