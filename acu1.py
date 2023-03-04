@@ -19,18 +19,37 @@ pd.set_option('display.max_rows', 500)
 import streamlit as st
 import pandas as pd
 import tabula
+# Define the app
+def app():
+    st.title("ACU Class Schedule")
+    st.write("Welcome! Please upload your class schedule in PDF format.")
+# Create a Streamlit file uploader widget for the PDF file
+pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
+
+name = st.text_input("Enter your name:")
+surname = st.text_input("Enter your surname:")
+email = st.text_input("Enter your email:")
+# Convert the PDF to a DataFrame using the convert_pdf_to_csv function
+import streamlit as st
+import pandas as pd
+import tabula
+
+# Add a title to the app
+st.title("PDF to CSV Converter")
 
 # Create a Streamlit file uploader widget for the PDF file
 pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 if pdf_file is not None:
-    # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
-  try:
-    df = tabula.convert_into_df(pdf_url, output_format="csv")[0]
-    st.write(df)
-  except Exception as e:
-    st.error("Error: " + str(e))
+    try:
+        df = tabula.convert_into_df(pdf_file, output_format="csv")
+        #st.write(df)
+    except:
+        st.error("Unable to convert PDF file. Please try again with a different file.")
+else:
+    st.warning("Please upload a PDF file.")
+
 
 
 # Import Module
@@ -55,7 +74,7 @@ def convert_pdf_to_csv(pdf_url):
     csv_data = convert_pdf_to_csv(pdf_url)
 
     # Read the CSV data from the string
-    df = pd.read_csv(io.StringIO(csv_data))
+    data = pd.read_csv(io.StringIO(csv_data))
 
     # Perform data analysis tasks on df
     ...
@@ -64,7 +83,7 @@ def convert_pdf_to_csv(pdf_url):
 # In[7]:
 
 
-data = pd.read_csv('MED212 online-program 23.02.23[28723].csv')
+
 
 
 # In[8]:
@@ -469,8 +488,8 @@ data4 = data4.drop(index=empty_rows)
 # In[54]:
 
 
-data4.to_csv(r'C:\Users\ASUS\OneDrive - Acıbadem Universitesi Kerem Aydınlar Kampüsü\Masaüstü\zahed223.csv', index=False, header=True)
-
+data4 = tabula.convert_into_df(data4, output_format="csv")
+data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
 
@@ -480,53 +499,73 @@ data4.to_csv(r'C:\Users\ASUS\OneDrive - Acıbadem Universitesi Kerem Aydınlar K
 
 # In[55]:
 
-
-from datetime import datetime, timedelta
+import streamlit as st
 import pandas as pd
+import tabula
 import icalendar
+from datetime import datetime, timedelta
+import base64
+from io import BytesIO
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 
-# read the input CSV file into a Pandas DataFrame
-df = pd.read_csv('zahed223.csv', delimiter=',', dtype=str)
 
-# create a new calendar
-calendar = icalendar.Calendar()
-calendar.add('prodid', '-//My Reminder Calendar//example.com//')
-calendar.add('version', '2.0')
+# Set up the app
+st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
 
-# iterate over the rows of the DataFrame and add events to the calendar
-for index, row in df.iterrows():
-    # create a new event
-    event = icalendar.Event()
+# Define a function to convert the DataFrame to an iCalendar file
+def create_ics_file(df):
+    calendar = icalendar.Calendar()
+    calendar.add('prodid', '-//My Reminder Calendar//example.com//')
+    calendar.add('version', '2.0')
+    for index, row in df.iterrows():
+        event = icalendar.Event()
+        event.add('summary', row['Subject'])
+        event.add('description', row['Description'])
+        start_date_str = row['Start Date']
+        start_time_str = row['Start Time']
+        end_date_str = row['End Date']
+        end_time_str = row['End Time']
+        start_dt = datetime.strptime(start_date_str + start_time_str, '%m/%d/%Y%H:%M')
+        end_dt = datetime.strptime(end_date_str + end_time_str, '%m/%d/%Y%H:%M')
+        event.add('dtstart', start_dt)
+        event.add('dtend', end_dt)
+        alarm = icalendar.Alarm()
+        alarm.add('action', 'DISPLAY')
+        alarm.add('description', 'Reminder: ' + row['Subject'])
+        alarm.add('trigger', timedelta(minutes=-15))
+        event.add_component(alarm)
+        calendar.add_component(event)
+    return calendar.to_ical()
 
-    # set the event properties from the DataFrame columns
-    event.add('summary', row['Subject'])
-    event.add('description', row['Description'])
+# Define a function to send email
+def send_email(email, file_data):
+    msg = MIMEMultipart()
+    msg['From'] = 'your_email@example.com'
+    msg['To'] = email
+    msg['Subject'] = 'Schedule'
 
-    # parse the start and end date/time strings into datetime objects
-    start_date_str = row['Start Date']
-    start_time_str = row['Start Time']
-    end_date_str = row['End Date']
-    end_time_str = row['End Time']
-    start_dt = datetime.strptime(start_date_str + start_time_str, '%m/%d/%Y%H:%M')
-    end_dt = datetime.strptime(end_date_str + end_time_str, '%m/%d/%Y%H:%M')
+    text = MIMEText('Please find attached your class schedule in iCalendar format.')
+    msg.attach(text)
 
-    # set the event start and end times
-    event.add('dtstart', start_dt)
-    event.add('dtend', end_dt)
+    file_part = MIMEApplication(file_data)
+    file_part.add_header('Content-Disposition', 'attachment', filename='schedule.ics')
+    msg.attach(file_part)
 
-    # create a new alarm
-    alarm = icalendar.Alarm()
-    alarm.add('action', 'DISPLAY')
-    alarm.add('description', 'Reminder: ' + row['Subject'])
-    alarm.add('trigger', timedelta(minutes=-15))
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login('Ariorad2020@gmail.com', 'Ariorad2020')
+    server.sendmail('Ariorad2020@gmail.com', email, msg.as_string())
+    server.quit()
 
-    # add the alarm to the event
-    event.add_component(alarm)
 
-    # add the event to the calendar
-    calendar.add_component(event)
+ calcal = create_ics_file(data4)
+ send_email(email,calcal)
+ 
 
-# write the calendar to a file
-with open('mycalendar56.ics', 'wb') as f:
-    f.write(calendar.to_ical())
+
+  
+
 
