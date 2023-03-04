@@ -8,3 +8,8 @@ pybase64
 requires.io
 secure-smtplib
 email-to
+opencv-python
+image-processing
+lattice
+parse
+handler
