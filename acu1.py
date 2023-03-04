@@ -20,6 +20,7 @@ import streamlit as st
 import pandas as pd
 import subprocess
 subprocess.run(["pip", "install", "tabula-py"])
+!pip install tabula-py
 import tabula
 
 # Define the app
