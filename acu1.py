@@ -46,6 +46,7 @@ def main():
     else:
         # Display a message to the user to upload a file
         st.warning("Please upload a PDF file.")
+        pdf_file = None
         return
 
 
