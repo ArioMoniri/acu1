@@ -76,7 +76,7 @@ import tabula
 from tabula import read_pdf
 
 if pdf_file is not None:
-    tables = tabula.read_pdf(pdf_file, pages='all')
+    tables = tabula.read_pdf(pdf_file.name, pages='all')
 
     # loop through each table and save as CSV file
     for i, table in enumerate(tables):
