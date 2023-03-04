@@ -29,39 +29,50 @@ def app():
     st.write("Welcome! Please upload your class schedule in PDF format.")
 # Create a Streamlit file uploader widget for the PDF file
 import streamlit as st
+import pdfplumber
+
+def extract_data(feed):
+    data = []
+    with pdfplumber.load(feed) as pdf:
+        pages = pdf.pages
+        for p in pages:
+            data.append(p.extract_tables())
+    return None
 
 def file_upload_widget(widget_id):
     return st.file_uploader("Upload a PDF file", type=["pdf"], key=widget_id)
-  
+  if uploaded_file is not None:
+    df = extract_data(uploaded_file)
+    
 import camelot
 import pandas as pd
 import tabula
 from tabula import read_pdf
 
-def main():
-    global pdf_file1
-    st.title("ACU")
-    file_upload_id = "file_upload"
-    pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"], key=file_upload_id)
+#def main():
+    #global pdf_file1
+    #st.title("ACU")
+    #file_upload_id = "file_upload"
+    #pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"], key=file_upload_id)
 
-    if pdf_file is not None:
+    #if pdf_file is not None:
     # Read the uploaded file using PyPDF2
-        pdf_file2 = PyPDF2.PdfReader(pdf_file)
-        tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
+        #pdf_file2 = PyPDF2.PdfReader(pdf_file)
+        #tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
     # loop through each table and save as CSV file
-        for i, table in enumerate(tables):
-            table.to_csv(f"table{i+1}.csv", index=False)
+        #for i, table in enumerate(tables):
+            #table.to_csv(f"table{i+1}.csv", index=False)
 
     # concatenate all CSV files into a single DataFrame
-        datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
-        pdf_file1 = 'f'
+        #datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
+        #pdf_file1 = 'f'
     
-    else:
+    #else:
         # Display a message to the user to upload a file
-        st.warning("Please upload a PDF file.")
-        pdf_file1 = None
-        return
+        #st.warning("Please upload a PDF file.")
+        #pdf_file1 = None
+        #return
 
 
 if __name__ == "__main__":
@@ -117,7 +128,7 @@ from tabula import read_pdf
 # In[8]:
 
 if pdf_file1 is not None:
-    data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
+    data1 = df.columns.to_frame().T.append(df, ignore_index=True)
     data1.columns = range(len(data1.columns))
 
 
