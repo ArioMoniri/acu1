@@ -28,6 +28,8 @@ pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
 name = st.text_input("Enter your name:")
 surname = st.text_input("Enter your surname:")
+medeng = st.text_input("Medeng zoom link if you are 3rd year enter 3rdyear word")
+zoomm = st.text_input("BSc Lecture link")
 email = st.text_input("Enter your email:")
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import streamlit as st
@@ -352,18 +354,18 @@ data4.dropna(
 
 
 word_part = 'THEORETICAL'
-if data4.apply(lambda x: x.astype(str).str.contains(word_part).any()).any():
-    print(f"The word part '{word_part}' exists in the DataFrame")
-else:
-    print(f"The word part '{word_part}' does not exist in the DataFrame")
+#if data4.apply(lambda x: x.astype(str).str.contains(word_part).any()).any():
+    #print(f"The word part '{word_part}' exists in the DataFrame")
+#else:
+    #print(f"The word part '{word_part}' does not exist in the DataFrame")
     # pause the code using input() function
-    input("Press Enter to continue...")
+    #input("Press Enter to continue...")
 
 
 # In[38]:
 
 
-data4.Description = data4.Description + '    https://zoom.us/j/95698119943'
+data4.Description = data4.Description + zoomm
 
 
 # In[39]:
@@ -444,7 +446,7 @@ indices = data4.index[data4['Subject'].str.contains('English')].tolist()
 data4.loc[indices, 'Description'] = ''
 
 # add the string 'Hello' to the previously emptied cells in the 'Description' column for those rows
-data4.loc[indices, 'Description'] = 'https://zoom.us/j/97669955181'
+data4.loc[indices, 'Description'] = medeng
 
 
 # In[50]:
