@@ -21,7 +21,7 @@ import pandas as pd
 import subprocess
 subprocess.run(["pip", "install", "tabula-py"])
 
-import tabula-py
+import tabula_py
 
 # Define the app
 def app():
