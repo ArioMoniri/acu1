@@ -46,6 +46,8 @@ if uploaded_file is not None:
     global pdf_file1
     df = extract_data(uploaded_file)
     pdf_file1 = 'd'
+else:
+    pdf_file1 = None
     
 import camelot
 import pandas as pd
