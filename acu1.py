@@ -31,13 +31,7 @@ def app():
 import streamlit as st
 import pdfplumber
 
-def extract_data(feed):
-    data = []
-    with pdfplumber.open(feed) as pdf:
-        pages = pdf.pages
-        for p in pages:
-            data.append(p.extract_tables())
-    return None
+
 
 #def file_upload_widget(widget_id):
     #return 
@@ -48,6 +42,14 @@ if uploaded_file is not None:
     pdf_file1 = 'd'
 else:
     pdf_file1 = None
+    
+def extract_data(feed):
+    data = []
+    with pdfplumber.open(feed) as pdf:
+        pages = pdf.pages
+        for p in pages:
+            data.append(p.extract_tables())
+    return None
     
 import camelot
 import pandas as pd
