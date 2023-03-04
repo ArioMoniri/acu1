@@ -538,9 +538,11 @@ def send_email(email, file_data):
     server.sendmail('Ariorad2020@gmail.com', email, msg.as_string())
     server.quit()
 
+    
 
- calcal = create_ics_file(data4)
- send_email(email,calcal)
+
+calcal = create_ics_file(data4)
+send_email(email,calcal)
  
 
 
