@@ -72,11 +72,11 @@ import pandas as pd
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import camelot
 import pandas as pd
-
-from tabula.io import read_pdf
+import tabula-py as tabula
+from tabula import read_pdf
 
 if pdf_file is not None:
-    tables = tabula.io.read_pdf(pdf_file, pages='all')
+    tables = tabula.read_pdf(pdf_file, pages='all')
 
     # loop through each table and save as CSV file
     for i, table in enumerate(tables):
