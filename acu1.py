@@ -95,8 +95,8 @@ else:
 # In[8]:
 
 
- data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
- data1.columns = range(len(data1.columns))
+data1 = datay.columns.to_frame().T.append(datay, ignore_index=True)
+data1.columns = range(len(data1.columns))
 
 
 # In[9]:
