@@ -72,7 +72,7 @@ import pandas as pd
 # Convert the PDF to a DataFrame using the convert_pdf_to_csv function
 import camelot
 import pandas as pd
-
+tables = None
 if pdf_file is not None:
     tables = camelot.read_pdf(pdf_file)
     for i, table in enumerate(tables):
