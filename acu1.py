@@ -46,8 +46,8 @@ def main():
     else:
         # Display a message to the user to upload a file
         st.warning("Please upload a PDF file.")
-    
 
+file_upload_widget(file)
 if __name__ == "__main__":
     main()
 
