@@ -18,6 +18,8 @@ pd.set_option('display.max_rows', 500)
 # Import Streamlit and other necessary libraries
 import streamlit as st
 import pandas as pd
+import subprocess
+subprocess.run(["pip", "install", "tabula-py"])
 import tabula_py as tabula
 
 # Define the app
