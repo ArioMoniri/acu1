@@ -21,3 +21,4 @@ pdfminer==20191125
 pdf2image
 pytesseract
 git+https://github.com/pdftables/python-pdftables-api.git
+temp
