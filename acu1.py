@@ -570,7 +570,8 @@ if pdf_file1 is not None:
 
 if pdf_file1 is not None:
     data4 = data4.to_csv(index=False)
-    data4 = pd.DataFrame(data4[1:], columns=data4[0])
+    st.write(data4)
+    #data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
 
