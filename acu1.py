@@ -54,6 +54,7 @@ from pytesseract import Output, TesseractError
 
 
 # Open the PDF file
+
 def extract_data(path):
     texts = []
     rsrcmgr = PDFResourceManager()
@@ -68,12 +69,17 @@ def extract_data(path):
     for page in PDFPage.get_pages(path):
       interpreter.process_page(page)
       t = retstr.getvalue()
+      texts.append(t)
+      retstr.truncate(0)
+    
     # text = retstr.getvalue()
-
     # fp.close()
     device.close()
     retstr.close()
-    df = pd.DataFrame({'text': [t]})
+    
+    # Convert texts to a Pandas DataFrame
+    df = pd.DataFrame({'text': texts})
+    
     return df
 
 #def extract_data(feed):
