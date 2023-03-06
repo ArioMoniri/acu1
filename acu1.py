@@ -74,10 +74,10 @@ def extract_data(path):
     # fp.close()
     device.close()
     retstr.close()
-    rows = [line.split() for line in t.split('/')]
+    #rows = [line.split() for line in t.split('/')]
     # Convert the rows to a Pandas DataFrame
-    df = pd.DataFrame(rows)
-    return df
+    #df = pd.DataFrame(rows)
+    return t
 
 #def extract_data(feed):
     #data = []
