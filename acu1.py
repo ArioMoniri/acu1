@@ -73,7 +73,8 @@ def extract_data(path):
     # fp.close()
     device.close()
     retstr.close()
-    return t,nbPages
+    df = pd.DataFrame({'text': [t]})
+    return df
 
 #def extract_data(feed):
     #data = []
