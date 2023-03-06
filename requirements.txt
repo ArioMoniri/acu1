@@ -16,3 +16,5 @@ handler
 PyPDF2
 tabula-py
 pdfplumber
+python-csv
+requires.io
