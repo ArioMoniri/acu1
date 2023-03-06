@@ -63,7 +63,7 @@ def extract_data(pdf_file):
         temp.write(pdf_file.read())
         temp.seek(0)
         csv_file = temp.name.replace('.pdf', '.csv')
-        conversion.csv(temp.name, csv_file)
+        conversion.csv(pdf_table, csv_file)
     return csv_file
 
 #def extract_data(feed):
