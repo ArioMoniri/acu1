@@ -16,3 +16,7 @@ handler
 PyPDF2
 tabula-py
 pdfplumber
+streamlit
+pdfminer==20191125
+pdf2image
+pytesseract
