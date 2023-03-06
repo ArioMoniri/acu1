@@ -34,15 +34,41 @@ import pdfplumber
 
 
 
-    
+import pdfplumber
+import csv
+import io
+import streamlit as st
+
 def extract_data(feed):
-    data = []
+# Open the PDF file
     with pdfplumber.open(feed) as pdf:
-        pages = pdf.pages
-        for p in pages:
-            data.append(p.extract_tables())
-        df = pd.DataFrame(sum(data, []))
+        # Create an in-memory buffer for the CSV data
+        csv_buffer = io.StringIO()
+
+        # Create a CSV writer object
+        writer = csv.writer(csv_buffer)
+
+        # Loop through each page of the PDF file
+        for page in pdf.pages:
+            # Extract the table data from the page
+            table = page.extract_table()
+
+            # Write each row of the table to the CSV buffer
+            for row in table:
+                writer.writerow(row)
+
+        # Get the CSV data from the buffer as a string
+        df = csv_buffer.getvalue()
     return df
+
+#def extract_data(feed):
+    #data = []
+    #with pdfplumber.open(feed) as pdf:
+        #pages = pdf.pages
+        #for p in pages:
+            #data.append(p.extract_tables())
+        #df = pd.DataFrame(sum(data, []))
+    #return df
 
 #def file_upload_widget(widget_id):
     #return 
