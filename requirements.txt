@@ -16,4 +16,3 @@ handler
 PyPDF2
 tabula-py
 pdfplumber
-python-csv
