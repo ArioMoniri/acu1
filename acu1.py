@@ -64,7 +64,10 @@ def extract_data(pdf_file):
         temp.seek(0)
         csv_file = temp.name.replace('.pdf', '.csv')
         conversion.csv(temp.name, csv_file)
-    return csv_file
+        with open(csv_file, 'r') as f:
+            csv_content = f.read()
+    return csv_content
+    
 
 #def extract_data(feed):
     #data = []
