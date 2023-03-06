@@ -94,7 +94,7 @@ if uploaded_file is not None:
     #StringData = StringIO(df)
     #df = pd.read_csv(StringData, sep =",")
     st.write(df)
-    st.write(df)
+    st.write(type(df))
 else:
     pdf_file1 = None
     
