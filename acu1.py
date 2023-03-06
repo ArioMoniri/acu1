@@ -39,6 +39,18 @@ import csv
 import io
 import streamlit as st
 from io import StringIO
+import streamlit as st
+from zipfile import ZipFile
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import StringIO
+import base64
+#------- OCR ------------
+import pdf2image
+import pytesseract
+from pytesseract import Output, TesseractError
 
 
 # Open the PDF file
