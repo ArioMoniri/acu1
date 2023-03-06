@@ -73,7 +73,7 @@ def extract_data(path):
     # fp.close()
     device.close()
     retstr.close()
-    return t, nbPages
+    return t
 
 #def extract_data(feed):
     #data = []
@@ -94,7 +94,7 @@ if uploaded_file is not None:
     #StringData = StringIO(df)
     #df = pd.read_csv(StringData, sep =",")
     st.write(df)
-    st.write(type(df))
+    st.write(str(df))
 else:
     pdf_file1 = None
     
