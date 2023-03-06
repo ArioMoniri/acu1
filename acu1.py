@@ -77,7 +77,7 @@ def extract_data(path):
     #rows = [line.split() for line in t.split('/')]
     # Convert the rows to a Pandas DataFrame
     #df = pd.DataFrame(rows)
-    return t
+    return t,nbPages
 
 #def extract_data(feed):
     #data = []
