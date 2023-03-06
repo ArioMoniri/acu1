@@ -494,7 +494,7 @@ if pdf_file1 is not None:
 # In[41]:
 
 
-#data4 = data4.replace(regex=['02.03.23'],value= '02.03.2023')
+data4 = data4.replace(regex=['02.03.23'],value= '02.03.2023')
 
 
 # In[42]:
@@ -648,7 +648,7 @@ if pdf_file1 is not None:
 
 
 
-    calcal = create_ics_file(data4)
+    calcal = create_ics_file(df)
     send_email(email,calcal)
 
 
