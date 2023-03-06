@@ -54,7 +54,8 @@ from pytesseract import Output, TesseractError
 
 
 # Open the PDF file
-
+import pdftables_api
+import io
 def extract_data(pdf_file):
     conversion = pdftables_api.Client('iqe7dhe1adbm')
     # PDf to CSV
