@@ -584,7 +584,7 @@ if pdf_file1 is not None:
 
 # In[55]:
 
-import streamlit as st
+
 import pandas as pd
 
 import icalendar
