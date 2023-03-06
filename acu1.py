@@ -55,29 +55,13 @@ from pytesseract import Output, TesseractError
 
 # Open the PDF file
 
-def extract_data(path):
-    texts = []
-    rsrcmgr = PDFResourceManager()
-    retstr = StringIO()
-    laparams = LAParams()
-    device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-    # fp = open(path, 'rb')
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    
-    file_pages = PDFPage.get_pages(path)
-    nbPages = len(list(file_pages))
-    for page in PDFPage.get_pages(path):
-      interpreter.process_page(page)
-      t = retstr.getvalue()
-    # text = retstr.getvalue()
-
-    # fp.close()
-    device.close()
-    retstr.close()
-    #rows = [line.split() for line in t.split('/')]
-    # Convert the rows to a Pandas DataFrame
-    #df = pd.DataFrame(rows)
-    return t,nbPages
+def extract_data(pdf_file):
+    conversion = pdftables_api.Client('iqe7dhe1adbm')
+    # PDf to CSV
+    csv_buffer = io.BytesIO()
+    conversion.csv(pdf_file, csv_buffer)
+    csv_buffer.seek(0)
+    return csv_buffer
 
 #def extract_data(feed):
     #data = []
