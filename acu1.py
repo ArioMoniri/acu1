@@ -62,7 +62,9 @@ def extract_data(pdf_file):
     csv_buffer = io.BytesIO()
     conversion.csv(pdf_file, csv_buffer)
     csv_buffer.seek(0)
-    return csv_buffer
+    csv_buffer = convert_to_csv(pdf_file)
+    csv_data = csv_buffer.read().decode('utf-8')
+    return csv_data
 
 #def extract_data(feed):
     #data = []
