@@ -74,7 +74,7 @@ def extract_data(path):
     # fp.close()
     device.close()
     retstr.close()
-    rows = [line.split() for line in t.split('\n')]
+    rows = [line.split() for line in t.split('\')]
     # Convert the rows to a Pandas DataFrame
     df = pd.DataFrame(rows)
     return df
