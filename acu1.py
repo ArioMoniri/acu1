@@ -58,13 +58,8 @@ import pdftables_api
 import io
 def extract_data(pdf_file):
     conversion = pdftables_api.Client('iqe7dhe1adbm')
-    # PDf to CSV
-    csv_buffer = io.BytesIO()
-    conversion.csv(pdf_file, csv_buffer)
-    csv_buffer.seek(0)
-    csv_buffer = convert_to_csv(pdf_file)
-    csv_data = csv_buffer.read().decode('utf-8')
-    return csv_data
+    conversion.csv(pdf_file,df)
+    return df
 
 #def extract_data(feed):
     #data = []
