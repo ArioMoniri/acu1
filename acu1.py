@@ -58,7 +58,7 @@ import pdftables_api
 import io
 def extract_data(pdf_file):
     conversion = pdftables_api.Client('iqe7dhe1adbm')
-    conversion.csv(pdf_file,df)
+    conversion.csv(pdf_file,pdf_file)
     return df
 
 #def extract_data(feed):
