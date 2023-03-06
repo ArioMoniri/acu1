@@ -57,7 +57,7 @@ from pytesseract import Output, TesseractError
 import pdftables_api
 import io
 import tempfile
-conversion = pdftables_api.Client('iqe7dhe1adbm')
+conversion = pdftables_api.Client('66zlndzcwsgr')
 def extract_data(pdf_file):
     with tempfile.NamedTemporaryFile(delete=False) as temp:
         temp.write(pdf_file.read())
