@@ -573,7 +573,7 @@ if pdf_file1 is not None:
     StringData = StringIO(data4)
     df = pd.read_csv(StringData, sep =",")
     st.write(data4)
-    st.write(type(data4)
+    st.write(type(data4))
     #data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
@@ -586,7 +586,6 @@ if pdf_file1 is not None:
 
 
 import pandas as pd
-
 import icalendar
 from datetime import datetime, timedelta
 import base64
