@@ -64,7 +64,7 @@ def extract_data(pdf_file):
         temp.seek(0)
         csv_file = temp.name.replace('.pdf', '.csv')
         conversion.csv(temp.name, csv_file)
-        with open(csv_file, 'r', encoding='utf-8', errors='replace') as f:
+        with open(csv_file, 'r', encoding='utf-8') as f:
             csv_content = f.read()
     return csv_content
     
