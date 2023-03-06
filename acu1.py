@@ -56,10 +56,14 @@ from pytesseract import Output, TesseractError
 # Open the PDF file
 import pdftables_api
 import io
+import tempfile
 def extract_data(pdf_file):
-    conversion = pdftables_api.Client('iqe7dhe1adbm')
-    conversion.csv(pdf_file,pdf_file)
-    return df
+    with tempfile.NamedTemporaryFile(delete=False) as temp:
+        temp.write(pdf_file.read())
+        temp.seek(0)
+        csv_file = temp.name.replace('.pdf', '.csv')
+        conversion.csv(temp.name, csv_file)
+    return csv_file
 
 #def extract_data(feed):
     #data = []
