@@ -77,6 +77,7 @@ if uploaded_file is not None:
     global pdf_file1
     pdf_file1 = 'd'
     df = extract_data(uploaded_file)
+    df = pd.DataFrame(df)
     st.write(df)
 else:
     pdf_file1 = None
