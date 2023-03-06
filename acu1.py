@@ -40,27 +40,28 @@ import io
 import streamlit as st
 from io import StringIO
 
-def extract_data(feed):
+
 # Open the PDF file
-    with pdfplumber.open(feed) as pdf:
-        # Create an in-memory buffer for the CSV data
-        csv_buffer = io.StringIO()
+def extract_data(path):
+    texts = []
+    rsrcmgr = PDFResourceManager()
+    retstr = StringIO()
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, laparams=laparams)
+    # fp = open(path, 'rb')
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    
+    file_pages = PDFPage.get_pages(path)
+    nbPages = len(list(file_pages))
+    for page in PDFPage.get_pages(path):
+      interpreter.process_page(page)
+      t = retstr.getvalue()
+    # text = retstr.getvalue()
 
-        # Create a CSV writer object
-        writer = csv.writer(csv_buffer)
-
-        # Loop through each page of the PDF file
-        for page in pdf.pages:
-            # Extract the table data from the page
-            table = page.extract_table()
-
-            # Write each row of the table to the CSV buffer
-            for row in table:
-                writer.writerow(row)
-
-        # Get the CSV data from the buffer as a string
-        df = csv_buffer.getvalue()
-    return df
+    # fp.close()
+    device.close()
+    retstr.close()
+    return t, nbPages
 
 #def extract_data(feed):
     #data = []
