@@ -574,6 +574,7 @@ if pdf_file1 is not None:
     df = pd.read_csv(StringData, sep =",")
     st.write(data4)
     st.write(type(data4))
+    st.write(df)
     #data4 = pd.DataFrame(data4[1:], columns=data4[0])
 
 # In[52]:
@@ -597,7 +598,7 @@ from email.mime.application import MIMEApplication
 
 if pdf_file1 is not None:
     # Set up the app
-    st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
+    #st.set_page_config(page_title="ACU Class Schedule", page_icon=":books:", layout="wide")
 
     # Define a function to convert the DataFrame to an iCalendar file
     def create_ics_file(df):
