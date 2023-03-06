@@ -38,6 +38,7 @@ import pdfplumber
 import csv
 import io
 import streamlit as st
+from io import StringIO
 
 def extract_data(feed):
 # Open the PDF file
@@ -77,7 +78,8 @@ if uploaded_file is not None:
     global pdf_file1
     pdf_file1 = 'd'
     df = extract_data(uploaded_file)
-    #df = pd.DataFrame(df)
+    StringData = StringIO(df)
+    df = pd.read_csv(StringData, sep =",")
     st.write(df)
     st.write(type(df))
 else:
