@@ -42,7 +42,7 @@ def extract_data(feed):
         for p in pages:
             data.append(p.extract_tables())
         df = pd.DataFrame(sum(data, []))
-    return None
+    return df
 
 #def file_upload_widget(widget_id):
     #return 
