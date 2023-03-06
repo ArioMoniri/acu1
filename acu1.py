@@ -33,14 +33,7 @@ import pdfplumber
 
 
 
-#def file_upload_widget(widget_id):
-    #return 
-uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
-if uploaded_file is not None:
-    global pdf_file1
-    pdf_file1 = 'd'
-else:
-    pdf_file1 = None
+
     
 def extract_data(feed):
     data = []
@@ -51,7 +44,15 @@ def extract_data(feed):
         df = pd.DataFrame(sum(data, []))
     return None
 
-df = extract_data(uploaded_file)
+#def file_upload_widget(widget_id):
+    #return 
+uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
+if uploaded_file is not None:
+    global pdf_file1
+    pdf_file1 = 'd'
+    df = extract_data(uploaded_file)
+else:
+    pdf_file1 = None
     
 import camelot
 import pandas as pd
