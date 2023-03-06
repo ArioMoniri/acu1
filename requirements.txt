@@ -20,4 +20,4 @@ streamlit
 pdfminer==20191125
 pdf2image
 pytesseract
-pdftables
+git+https://github.com/pdftables/python-pdftables-api.git
