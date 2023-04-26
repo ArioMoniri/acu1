@@ -69,14 +69,14 @@ import tempfile
     #return csv_content
     
 
-#def extract_data(feed):
-    #data = []
-    #with pdfplumber.open(feed) as pdf:
-        #pages = pdf.pages
-        #for p in pages:
-            #data.append(p.extract_tables())
-        #df = pd.DataFrame(sum(data, []))
-    #return df
+def extract_data(feed):
+    data = []
+    with pdfplumber.open(feed) as pdf:
+        pages = pdf.pages
+        for p in pages:
+            data.append(p.extract_tables())
+        df = pd.DataFrame(sum(data, []))
+    return df
 
 #def file_upload_widget(widget_id):
     #return 
@@ -84,11 +84,11 @@ uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 if uploaded_file is not None:
     global pdf_file1
     pdf_file1 = 'd'
-    #df = extract_data(uploaded_file)
+    df = extract_data(uploaded_file)
     #StringData = StringIO(df)
-    #df = pd.read_csv(StringData)
-    #st.write(df)
-    #st.write(type(df))
+    df = pd.read_csv(StringData)
+    st.write(df)
+    st.write(type(df))
 else:
     pdf_file1 = None
     
@@ -148,7 +148,7 @@ import tabula
 from tabula import read_pdf
 
 if pdf_file1 is not None:
-    pdf_file2 = PyPDF2.PdfReader(pdf_file)
+    pdf_file2 = PyPDF2.PdfReader(df)
     tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
      #loop through each table and save as CSV file
