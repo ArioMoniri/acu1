@@ -85,7 +85,7 @@ if uploaded_file is not None:
     global pdf_file1
     pdf_file1 = 'd'
     df = extract_data(uploaded_file)
-    #StringData = StringIO(df)
+    StringData = StringIO(df)
     df = pd.read_csv(StringData)
     st.write(df)
     st.write(type(df))
