@@ -57,16 +57,16 @@ from pytesseract import Output, TesseractError
 import pdftables_api
 import io
 import tempfile
-conversion = pdftables_api.Client('66zlndzcwsgr')
-def extract_data(pdf_file):
-    with tempfile.NamedTemporaryFile(delete=False) as temp:
-        temp.write(pdf_file.read())
-        temp.seek(0)
-        csv_file = temp.name.replace('.pdf', '.csv')
-        conversion.csv(temp.name, csv_file)
-        with open(csv_file, 'rb') as f:
-            csv_content = f.read()
-    return csv_content
+#conversion = pdftables_api.Client('66zlndzcwsgr')
+#def extract_data(pdf_file):
+    #with tempfile.NamedTemporaryFile(delete=False) as temp:
+        #temp.write(pdf_file.read())
+        #temp.seek(0)
+        #csv_file = temp.name.replace('.pdf', '.csv')
+        #conversion.csv(temp.name, csv_file)
+        #with open(csv_file, 'rb') as f:
+            #csv_content = f.read()
+    #return csv_content
     
 
 #def extract_data(feed):
@@ -147,16 +147,16 @@ import pandas as pd
 import tabula
 from tabula import read_pdf
 
-#if pdf_file1 is not None:
-    #pdf_file2 = PyPDF2.PdfReader(pdf_file)
-    #tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
+if pdf_file1 is not None:
+    pdf_file2 = PyPDF2.PdfReader(pdf_file)
+    tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
-    # loop through each table and save as CSV file
-    #for i, table in enumerate(tables):
-        #table.to_csv(f"table{i+1}.csv", index=False)
+     loop through each table and save as CSV file
+    for i, table in enumerate(tables):
+        table.to_csv(f"table{i+1}.csv", index=False)
 
     # concatenate all CSV files into a single DataFrame
-    #datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
+    data1 = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
         
     
 
