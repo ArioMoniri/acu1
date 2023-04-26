@@ -97,24 +97,24 @@ import pandas as pd
 import tabula
 from tabula import read_pdf
 
-#def main():
-    #global pdf_file1
+def main():
+    global pdf_file1
     #st.title("ACU")
-    #file_upload_id = "file_upload"
-    #pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"], key=file_upload_id)
+    file_upload_id = "file_upload"
+    pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"], key=file_upload_id)
 
-    #if pdf_file is not None:
+    if pdf_file is not None:
     # Read the uploaded file using PyPDF2
-        #pdf_file2 = PyPDF2.PdfReader(pdf_file)
-        #tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
+        pdf_file2 = PyPDF2.PdfReader(pdf_file)
+        tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
     # loop through each table and save as CSV file
-        #for i, table in enumerate(tables):
-            #table.to_csv(f"table{i+1}.csv", index=False)
+        for i, table in enumerate(tables):
+            table.to_csv(f"table{i+1}.csv", index=False)
 
     # concatenate all CSV files into a single DataFrame
-        #datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
-        #pdf_file1 = 'f'
+        datay = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
+        pdf_file1 = 'f'
     
     #else:
         # Display a message to the user to upload a file
@@ -147,16 +147,16 @@ import pandas as pd
 import tabula
 from tabula import read_pdf
 
-if pdf_file1 is not None:
-    pdf_file2 = PyPDF2.PdfReader(uploaded_file)
-    tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
+#if pdf_file1 is not None:
+    #pdf_file2 = PyPDF2.PdfReader(uploaded_file)
+    #tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
      #loop through each table and save as CSV file
-    for i, table in enumerate(tables):
-        table.to_csv(f"table{i+1}.csv", index=False)
+    #for i, table in enumerate(tables):
+     #   table.to_csv(f"table{i+1}.csv", index=False)
 
     # concatenate all CSV files into a single DataFrame
-    data1 = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
+    #data1 = pd.concat([pd.read_csv(f"table{i+1}.csv") for i in range(len(tables))], ignore_index=True)
         
     
 
@@ -176,7 +176,7 @@ if pdf_file1 is not None:
 # In[8]:
 
 if pdf_file1 is not None:
-    data1 = df.columns.to_frame().T.append(df, ignore_index=True)
+    data1 = df.columns.to_frame().T.append(datay, ignore_index=True)
     data1.columns = range(len(data1.columns))
 
 
