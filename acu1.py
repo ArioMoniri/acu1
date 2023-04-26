@@ -151,7 +151,7 @@ if pdf_file1 is not None:
     pdf_file2 = PyPDF2.PdfReader(pdf_file)
     tables = tabula.read_pdf(pdf_file2, pages='all',multiple_tables=True,stream=True, guess=True)
 
-     loop through each table and save as CSV file
+     #loop through each table and save as CSV file
     for i, table in enumerate(tables):
         table.to_csv(f"table{i+1}.csv", index=False)
 
